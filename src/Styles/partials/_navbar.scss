@@ -1,0 +1,27 @@
+@import './data';
+
+.nav-menu{
+    display: flex;
+    width: 100%;
+    height: 10%;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: $c3;
+    align-items: center;
+
+    svg{
+        font-size: 1.8rem;
+        color: $c1;
+    }
+
+
+
+    button{
+        background-color: transparent;
+        border: none;
+        color: $c1;
+        svg{
+            font-size: 1.5rem;
+        }        
+    }
+}

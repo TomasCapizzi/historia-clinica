@@ -1,0 +1,20 @@
+@import './data';
+
+.about-app{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+
+    h3{
+        width: 100%;
+        color: $c7;
+    }
+
+    p{
+        text-align: justify;
+        width: 80%;
+        color: $c9;
+    }
+}

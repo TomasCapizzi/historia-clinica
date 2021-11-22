@@ -1,0 +1,18 @@
+@import './data';
+
+.login{
+    display: flex;
+    width: 100%;
+    height: 80vh;
+    justify-content: center;
+    align-items: center;
+
+    button{
+        background-color: $c3;
+        border: none;
+        padding: 15px;
+        border-radius: 15px;
+        cursor: pointer;
+        color: $c8;
+    }
+}
