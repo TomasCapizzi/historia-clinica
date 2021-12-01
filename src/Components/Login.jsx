@@ -15,15 +15,13 @@ export default function Login({setUser}){
         setUser(auth.currentUser)
     }
 
-    function wait(){
-
-        setTimeout(() => {
-            setHandler(true)
-        }, 1200);
-    }
-
     useEffect(()=>{
-        wait()
+        if(!handler){
+            setTimeout(() => {
+                setHandler(true)
+            }, 1200);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
 
@@ -32,7 +30,7 @@ export default function Login({setUser}){
 
             
             {
-                !handler ? <Spinner/> : <button onClick={logIn} >Log in with Google</button>
+                !handler ? <Spinner/> : <button onClick={logIn} className='btn2' ><span>Log in with Google</span></button>
             }
 
         </section>
