@@ -6,26 +6,46 @@
     width: 80%;
     height: auto;
     justify-content: space-around;
-    border: 3.5px solid $c2;
+    background-color: $c6;
     margin-bottom: 15px;
-    border-radius: 18px;
+    border-radius: 5px;
+    box-shadow: $bs;
 
     p{
         display: flex;
         flex-wrap: wrap;
         width: 70%;
         justify-content: center;
-        color: $c8;
+        color: $c1;
+        font-weight: bold;
     }
 
     button{
         border: none;
-        border-left: 3px solid $c5;
+        border-left: 3px solid $c1;
         background-color: transparent;
 
         a{
             text-decoration: none;
-            color: $c6;
+            color: $c1;
+        }
+    }
+
+
+
+    @media only screen and(min-width: 1024px){
+        width: 65%;
+        margin-bottom: 22px;    
+        p{
+            font-size: 1.5rem;
+        }    
+        button{    
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            a{
+                font-size: 1.1rem;
+            }
         }
     }
 }

@@ -2,10 +2,9 @@
 
 .home-container{
     display: flex;
+    flex-direction: column;
     width: 100%;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 20px;
+    height: 80vh;
 
     .btn-container{
         display: flex;
@@ -13,26 +12,57 @@
         flex-wrap: wrap;
         width: 100%;
         align-items: center;
+        margin-bottom: 50px;
 
-        button{
-            background-color: $c3;
-            width: 60%;
-            height: 40px;
-            margin-top: 15px;
-            border: none;
-            border-radius: 8px;
-            padding: 5px;
-            a{
-                text-decoration: none;
-                color: $c7;
+        a{ 
+            width: 220px;
+            text-decoration: none;
+
+            button{
+                display: inline-flex;
+                width: 100%;
+                height: 60px;
+                margin-top: 30px;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 1rem;
+                align-items: center;
+                justify-content: center;
+                transition: .3s ease all;
+            }       
+    }
+
+    }
+
+    /*Querys*/
+    @media only screen and(min-width: 1024px) {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin: 0;
+        padding: 0;
+        height: auto;
+
+        .btn-container{    
+            width: 50%;
+        a{
+            width: 200px;
+            display: flex;
+            justify-content: center;
+            text-decoration: none;
+            button{
+                width: 100%;
+                height: 60px;
+                margin-top: 30px;
+                border: none;
+                border-radius: 10px;
+                box-shadow: $bs;
+                font-size: 1.2rem;
             }
         }
-
-        button:nth-child(2){
-            background-color: $c6;
-            a{
-                color: $c1;
-            }
+    
         }
     }
 }

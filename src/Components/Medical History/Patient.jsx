@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 
 export default function Patient({patient}){
 
-    console.log(patient);
-
     return(
         <article className='patient'>
             <p>{patient.interrogatory.name}</p>

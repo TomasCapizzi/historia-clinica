@@ -5,8 +5,18 @@
     width: 100%;
     flex-wrap: wrap;
     text-align: center;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     height: 80vh;
+    position: relative;
+
+    .back-page{
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        font-size: 1.5rem;
+        color: $c6;
+    }
 
     h3{
         color: $c6;
@@ -18,6 +28,25 @@
         flex-direction: column;
         width: 100%;
         align-items: center;
+
+        .no-patients{
+            p{
+                color: $c5;
+                font-size: 1.1rem;
+            }
+            button{
+                background-color: $c7;
+                padding: 8px 14px;
+                border: none;
+                border-radius: 8px;
+                a{
+                    color: $c1;
+                    text-decoration: none;
+                    font-size: 1.15rem;
+                }
+            }
+        }
+
     }
 
     .search-container{
@@ -39,6 +68,51 @@
         svg{
             color: $c7;
             font-size: 1.3rem;
+        }
+    }
+
+    /*Querys */
+
+    @media only screen and(min-width: 1024px){
+        min-height: 100vh;
+        .back-page{
+            left: 20px;
+            font-size:2.4rem;
+        }    
+        h3{
+            font-size: 2.3rem;
+        }
+        .no-patients{
+            p{
+                color: $c5;
+                font-size: 1.4rem;
+            }
+            button{
+                background-color: $c7;
+                padding: 12px 20px;
+                border: none;
+                border-radius: 8px;
+                a{
+                    color: $c1;
+                    text-decoration: none;
+                    font-size: 1.3rem;
+                }
+            }
+        }
+    
+        .search-container{
+            width: 40%;
+            height: 40px;
+            padding: 6px;
+            border-radius: 10px;    
+            input{
+                font-size: 1.6rem;
+            }
+    
+            svg{
+                color: $c7;
+                font-size: 1.6rem;
+            }
         }
     }
 }

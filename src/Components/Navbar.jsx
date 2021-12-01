@@ -20,7 +20,6 @@ export default function Navbar({user, setUser}){
         <nav className='nav-menu'>
             <Link to='/'><FaBookMedical/></Link>
             <button onClick={logOut}><HiLogout/></button>
-
         </nav>
     )
 }

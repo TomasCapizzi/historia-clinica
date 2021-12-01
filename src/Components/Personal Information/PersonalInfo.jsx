@@ -39,10 +39,13 @@ export default function PersonalInfo({user}){
 
     return(
         <section className='personal-info'>
-            <p>Your profile</p>
-            <img src={user.photoURL} alt="avatar" />
+            <div className='info-header'>
+                <h3>Your profile</h3>
+                <img src={user.photoURL} alt="avatar" />
+            </div>
+
             {
-                !load ? <section>
+                !load ? <>
                     { userData ? 
                         <div className='user-data'>
                             <div>
@@ -67,7 +70,7 @@ export default function PersonalInfo({user}){
                             }
                         </div>
 
-                    } </section>  :
+                    } </>  :
                         
                     <Spinner />
                     

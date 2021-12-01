@@ -28,14 +28,15 @@ function App() {
       <div className="App">
         <Navbar user={user} setUser={setUser} />
         <Routes>
-        {
-          user ? 
-            <Route path='/' element={ <Home  user={user} setUser={setUser} /> }/>  :
-            <Route path='/' element={ <Login  setUser={setUser}/> } />
-        }
-        <Route path='/form' element={ <MedicalHistoryForm/> }/>
-        <Route path='/records-list' element={ <RecordsList /> } />
-        <Route path='/patient/:id'  element={ <PatientDetail/> } />
+          {
+            user ?<Route path='/' element={ <Home  user={user} setUser={setUser} />}/> 
+            :  <Route path='/'element={<Login  setUser={setUser}/> } />
+
+          }         
+          <Route path='/form' element={user ? <MedicalHistoryForm/> : <Login setUser={setUser}/>}/>
+          <Route path='/records-list' element={user? <RecordsList/> : <Login setUser={setUser}/>} />
+          <Route path='/patient/:id'  element={user? <PatientDetail/> : <Login setUser={setUser}/> } />
+
         </Routes>
         <Footer/>
       </div>

@@ -12,8 +12,8 @@ export default function Home({user}){
         <section className='home-container'>
             <PersonalInfo user={user}/>
             <div className='btn-container'>
-                <button><Link to='/records-list'>List of Patients</Link></button>
-                <button><Link to='/form'>Create New Medical Record <FaPlus/></Link></button>
+                <Link to='/records-list'><button className='btn1'><span>List of Patients</span></button></Link>
+                <Link to='/form'><button className='btn2'><span>Create New Medical Record <FaPlus/></span></button></Link>
             </div>
             <AppInfo/>
             <OtherUsers user={user}/>

@@ -3,7 +3,8 @@ import { db,app } from "../../Firebase/firebase";
 import { getAuth } from "@firebase/auth";
 import { Link } from "react-router-dom";
 import {IoArrowBack} from 'react-icons/io5';
-import {FiChevronsDown, FiChevronsUp} from 'react-icons/fi'
+import {IoChevronBackSharp} from 'react-icons/io5';
+import {FiChevronsDown, FiChevronsUp} from 'react-icons/fi';
 
 
 export default function MedicalHistoryForm(){
@@ -14,14 +15,22 @@ export default function MedicalHistoryForm(){
 
     const [toggleHistoryView, setToggleHistoryView] = useState(false);
     const [toggleExamsView, setToggleExamsView] = useState(false);
+    const [toggleInterrogatoryView, setToggleInterrogaroyView] = useState(false);
 
     const history = document.getElementById('history');
     const exams = document.getElementById('exams');
+    const int = document.getElementById('interrogatory');
 
     useEffect(()=>{
         setUser(auth.currentUser);
-    },[])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[auth])
 
+    function toggleInterrogatoryClass(e){
+        //const int = e.target.elements.interrogatory.value;
+        int.classList.toggle('on');
+        setToggleInterrogaroyView(!toggleInterrogatoryView);
+    }
     
     function toggleHistoryClass(){
         history.classList.toggle('on');
@@ -32,6 +41,7 @@ export default function MedicalHistoryForm(){
         exams.classList.toggle('on');
         setToggleExamsView(!toggleExamsView)
     }
+
 
     function createRecord(e){
         e.preventDefault();
@@ -68,7 +78,7 @@ export default function MedicalHistoryForm(){
                 genitals: document.getElementById('genitals').value,
                 nervousSystem: document.getElementById('nervousSystem').value,
             },
-            presumptiveDiagnosis: document.getElementById('presumptiveDiagnosis').value
+            finalDiagnosis: document.getElementById('finalDiagnosis').value
         }
         
         console.log(recordData);
@@ -88,29 +98,38 @@ export default function MedicalHistoryForm(){
         {
             recordHandler ? 
         <form action="" className='record-form'>
+            <Link to='/'><IoChevronBackSharp className='back-page'/></Link>
+            <h1>Create new record</h1>
             <article className='form-interrogatory'>
-                <h5>Interrogatory</h5>
-                <label htmlFor="">Name</label>
-                <input type="text" id='name' required/>
-                <label htmlFor="">Sex</label>
-                <select name="" id="sex">
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                </select>
-                <label htmlFor="">Age</label>
-                <input type="number" id='age' required/>
+                <div className='header'>
+                    <h5>Interrogatory</h5>
+                    <span onClick={toggleInterrogatoryClass}>{toggleInterrogatoryView ? <FiChevronsUp/> : <FiChevronsDown/>}</span>
+                </div>
+                <article id='interrogatory' className='interrogatory-options'>
+                    <label htmlFor="">Name</label>
+                    <input type="text" id='name' required/>
+                    <label htmlFor="">Sex</label>
+                    <select name="" id="sex">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                        <label htmlFor="">Age</label>
+                        <input type="number" id='age' required/>
+                    
+                    <article className='form-consult'>
+                        <label htmlFor="">Reason of consulting</label>
+                        <textarea name="" id="reason-consulting" cols="30" rows="10"></textarea>
+                        <label htmlFor="">Actual disease</label>
+                        <input type="text"id='actual-disease' />
+                    </article>
+                </article>
             </article>
-            <article className='form-consult'>
-                <label htmlFor="">Reason of consulting</label>
-                <textarea name="" id="reason-consulting" cols="30" rows="10"></textarea>
-                <label htmlFor="">Actual disease</label>
-                <input type="text"id='actual-disease' />
-            </article>
-            <article className='form-history'>
 
+
+            <article className='form-history'>
                 <div  className='header'>
                     <h5>Personal History</h5>
-                    <a onClick={toggleHistoryClass}>{toggleHistoryView ? <FiChevronsUp/> : <FiChevronsDown/>}</a>
+                    <span onClick={toggleHistoryClass}>{toggleHistoryView ? <FiChevronsUp/> : <FiChevronsDown/>}</span>
                 </div>
                 <div className='options' id='history'>
                     <label htmlFor="">Physiological</label>
@@ -139,7 +158,7 @@ export default function MedicalHistoryForm(){
                 
                 <div className='header'>
                     <h5>Physical Exams</h5>
-                    <a  onClick={toggleExamsClass}>{toggleExamsView ? <FiChevronsUp/> : <FiChevronsDown/>}</a>
+                    <span  onClick={toggleExamsClass}>{toggleExamsView ? <FiChevronsUp/> : <FiChevronsDown/>}</span>
                 </div>                
                 <div className='form-exams' id='exams'>
                     <label htmlFor="">Vital Signs</label>
@@ -162,8 +181,8 @@ export default function MedicalHistoryForm(){
             </article>
             <article className='form-diagnosis'>
                 <div>
-                        <h5 htmlFor="">Presumptive Diagnosis</h5>
-                        <input type="text" id='presumptiveDiagnosis' required/>
+                        <h5 htmlFor="">Final Diagnosis</h5>
+                        <input type="text" id='finalDiagnosis' required/>
                     </div>
                     <button className='btn-submit-form' onClick={(e)=> createRecord(e)}>Save</button>
             </article>
