@@ -2,6 +2,8 @@
 
 Este proyecto esta pensado para mantener un registro de las historias clínicas por cada usuario. Utiliza Firebase Auth para poder registrarse y así mediante Firestore tener el listado de cada paciente con su historia.
 
+#### Deploy: https://historia-clinica.vercel.app/
+
 ### Stack
 
 React JS
