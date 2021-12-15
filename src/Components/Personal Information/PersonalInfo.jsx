@@ -1,41 +1,31 @@
 import React,{useState, useEffect} from "react";
 import {GrAddCircle} from 'react-icons/gr';
 import ExtraInfo from './ExtraInfo';
-import { db } from "../../Firebase/firebase";
 import Spinner from "../Spinner";
+import useFirebaseUsersList from "../../Hooks/useFirebaseUsersList";
+import useLoad from "../../Hooks/useLoad";
 
 export default function PersonalInfo({user}){
 
     const [addInfo, setAddInfo] = useState(false); // Handler para agregar o no la info faltante
-    
-    const [load,setLoad] = useState(true); //Handler de carga
-    const [userData, setUserData] = useState(null)//Data de  usuario activo
+
+    // Custom Hooks //
+    const {getListOfUsers, userData} = useFirebaseUsersList();
+    const {load, finishLoad} = useLoad();
+    ////////////////////////////////////////////////////////////////////
 
     function changeState(){
         setAddInfo(!addInfo)
     }
 
-    async function checkUserExists(){
-
-        const usersList = await db.collection('users')
-        usersList.onSnapshot(
-            query => {
-                const data = query.docs.map(
-                    doc => ({
-                        ...doc.data(),
-                        id: doc.id
-                    })
-                )
-                setUserData(data.find(item => item.uid === user.uid));
-                setLoad(false);         
-            }
-        )
+    function checkUserExists(){
+        getListOfUsers(user, finishLoad);
     }
 
     useEffect(()=>{
-        checkUserExists()
+        checkUserExists();    
         // eslint-disable-next-line
-    },[load])
+    },[])
 
     return(
         <section className='personal-info'>
@@ -57,14 +47,14 @@ export default function PersonalInfo({user}){
                                 <p>{userData.userCollege}</p>
                             </div>
                         </div>
-                        : <div>
+                        : <div className="missing-info">
                             {
                                 addInfo ? 
                                     <ExtraInfo  changeState={changeState}  user={user}/>
                                 :
-                                    <div>
+                                    <div className="complete-info">
                                         <p>Your user is not complete</p>
-                                        <button onClick={changeState}>Finish user<GrAddCircle/></button>
+                                        <button onClick={changeState} className="btn1"><span>Finish user<GrAddCircle/></span></button>
                                     </div>
                         
                             }
