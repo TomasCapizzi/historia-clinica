@@ -1,20 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {app} from "../Firebase/firebase";
-import { getAuth, signOut } from "@firebase/auth";
 import {FaBookMedical} from 'react-icons/fa';
 import {HiLogout} from 'react-icons/hi'
+import useAuth from "../Hooks/useAuth";
 
-export default function Navbar({user, setUser}){
+export default function Navbar(){
 
-    
-    const auth = getAuth(app)
-
-    function logOut(){
-        console.log('log out')
-        signOut(auth)
-        setUser(null)
-    }
+    const {logOut} = useAuth();
 
     return(
         <nav className='nav-menu'>
