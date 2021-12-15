@@ -10,12 +10,14 @@ import {app} from "./Firebase/firebase";
 import MedicalHistoryForm from "./Components/Medical History/MedicalHistoryForm";
 import RecordsList from "./Components/Medical History/RecordsList";
 import PatientDetail from "./Components/Medical History/PatientDetail";
-
+import UserContextProvider from "./Context/UserContext";
 
 
 function App() {
 
-  const [user, setUser] = useState(null)
+ // const {user, setUser} =  useContext(UserContext)
+
+  const [user, setUser] = useState(null);
 
   const auth = getAuth(app);
 
@@ -24,23 +26,24 @@ function App() {
   })
 
   return (
-    <BrowserRouter>
-      <div className="App">
-        <Navbar user={user} setUser={setUser} />
-        <Routes>
-          {
-            user ?<Route path='/' element={ <Home  user={user} setUser={setUser} />}/> 
-            :  <Route path='/'element={<Login  setUser={setUser}/> } />
+    <UserContextProvider>
+      <BrowserRouter>
+        <div className="App">
+          <Navbar/>
+          <Routes>
+            {
+              user ? <Route path='/' element={ <Home  user={user} setUser={setUser} />}/> 
+              :  <Route path='/'element={<Login/> } />
+            }         
+            <Route path='/form' element={user ? <MedicalHistoryForm/> : <Login/>}/>
+            <Route path='/records-list' element={user? <RecordsList/> : <Login/>} />
+            <Route path='/patient/:id'  element={user? <PatientDetail/> : <Login/> } />
 
-          }         
-          <Route path='/form' element={user ? <MedicalHistoryForm/> : <Login setUser={setUser}/>}/>
-          <Route path='/records-list' element={user? <RecordsList/> : <Login setUser={setUser}/>} />
-          <Route path='/patient/:id'  element={user? <PatientDetail/> : <Login setUser={setUser}/> } />
-
-        </Routes>
-        <Footer/>
-      </div>
-    </BrowserRouter>
+          </Routes>
+          <Footer/>
+        </div>
+      </BrowserRouter>
+    </UserContextProvider>
   );
 }
 
