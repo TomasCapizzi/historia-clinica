@@ -71,9 +71,8 @@ export default function RecordsList(){
                     ) : 
                     <div className='no-patients'>
                         <p>You haven´t add any patients</p>
-                        <button><Link to='/form'>Add +</Link></button>
+                        <button className="btn2"><Link to='/form'><span>Add +</span></Link></button>
                     </div>
-
                     : <Spinner/>
                 }
             </div>
