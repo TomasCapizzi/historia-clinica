@@ -3,7 +3,7 @@ import { db} from '../../Firebase/firebase';
 
 export default function ExtraInfo({changeState, user}){
 
-    const {uid, photoURL, displayName} = user    
+    const {uid, photoURL, displayName} = user    // Destructuring user
 
     function createUser(e){
         e.preventDefault()
@@ -29,16 +29,7 @@ export default function ExtraInfo({changeState, user}){
         changeState();
     }
 
-    /*
-            const userData = {
-            uid,
-            photoURL,
-            displayName,
-
-        }
-    */
-
-    return(
+    return(        
         <form className='extra-info'>
             <label htmlFor="">Birth</label>
             <input type="date" id='user-birth'/>
@@ -59,7 +50,7 @@ export default function ExtraInfo({changeState, user}){
             </select>
             <label htmlFor="">University</label>
             <input type="text" id='user-college' />
-            <button onClick={(e)=> createUser(e)} >Submit info</button>
+            <button onClick={(e)=> createUser(e)} className="btn2" ><span>Submit info</span></button>
         </form>
     )
 }
