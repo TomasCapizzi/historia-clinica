@@ -7,41 +7,22 @@ import {IoChevronBackSharp} from 'react-icons/io5';
 import {FiChevronsDown, FiChevronsUp} from 'react-icons/fi';
 
 
-export default function MedicalHistoryForm(){
+export default function MedicalHistoryForm(){   
 
-    const [recordHandler, setRecordHandler] = useState(true);
-    const [user,setUser] = useState(null)
-    const auth = getAuth(app);
+    //const {user} = useContext(UserContext);
 
+    const [user, setUser] = useState(null)
+    const auth = getAuth(app)
+
+    const [recordHandler, setRecordHandler] = useState(true);    
+    
     const [toggleHistoryView, setToggleHistoryView] = useState(false);
     const [toggleExamsView, setToggleExamsView] = useState(false);
     const [toggleInterrogatoryView, setToggleInterrogaroyView] = useState(false);
-
+    
     const history = document.getElementById('history');
     const exams = document.getElementById('exams');
     const int = document.getElementById('interrogatory');
-
-    useEffect(()=>{
-        setUser(auth.currentUser);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[auth])
-
-    function toggleInterrogatoryClass(e){
-        //const int = e.target.elements.interrogatory.value;
-        int.classList.toggle('on');
-        setToggleInterrogaroyView(!toggleInterrogatoryView);
-    }
-    
-    function toggleHistoryClass(){
-        history.classList.toggle('on');
-        setToggleHistoryView(!toggleHistoryView)
-    }
-
-    function toggleExamsClass(){
-        exams.classList.toggle('on');
-        setToggleExamsView(!toggleExamsView)
-    }
-
 
     function createRecord(e){
         e.preventDefault();
@@ -92,6 +73,25 @@ export default function MedicalHistoryForm(){
         }   
 
     }
+
+    function toggleInterrogatoryClass(e){
+        int.classList.toggle('on');
+        setToggleInterrogaroyView(!toggleInterrogatoryView);
+    }
+    
+    function toggleHistoryClass(){
+        history.classList.toggle('on');
+        setToggleHistoryView(!toggleHistoryView)
+    }
+
+    function toggleExamsClass(){
+        exams.classList.toggle('on');
+        setToggleExamsView(!toggleExamsView)
+    }
+
+    useEffect(()=>{
+        setUser(auth.currentUser)
+    },[auth])
 
     return (
         <>
