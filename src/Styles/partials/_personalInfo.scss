@@ -56,6 +56,42 @@
         }
     }
 
+    .missing-info{
+        display: flex;
+        width: 50%;
+        justify-content: center;
+        .complete-info{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            p{
+                font-size: 1.6rem;
+                color: $c7;
+            }
+
+            button{
+                width: 180px;
+                padding: 10px;
+                border: none;
+                border-radius: 8px;
+                box-shadow: $bs;
+                font-size: 1.1rem;
+
+
+                span{
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-around;
+                    svg{
+                        color: $c5;
+                        font-size: 1.3rem;
+                    }
+                }
+            }
+        }
+    }
 
 
 
