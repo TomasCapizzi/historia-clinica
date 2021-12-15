@@ -1,33 +1,15 @@
-import React, {useState, useEffect} from "react";
-import { db } from "../Firebase/firebase";
+import React, { useEffect} from "react";
+import useFirebaseUsersList from "../Hooks/useFirebaseUsersList";
 import Spinner from "./Spinner";
 
 export default function OtherUsers({user}){
 
-    const [userList, setUserList] = useState([]); //Obtener lista de usuarios
-   // const [handler, setHandler] = useState(false)
-
-    
-    function getListOfUsers(){
-        const usersList = db.collection('users')
-        usersList.onSnapshot(
-            query => {
-                const data = query.docs.map(
-                    doc => ({
-                        ...doc.data(),
-                        id: doc.id
-                    })
-                )
-                setUserList(data);  
-            }
-        )
-    }
-
-    // Establecer limite
+    const {getListOfUsers,userList} = useFirebaseUsersList();
 
     useEffect(()=>{
-        getListOfUsers();
-    })
+        getListOfUsers(user);
+         // eslint-disable-next-line
+    },[])
 
     return(
         <section className='other-users'>
@@ -37,7 +19,7 @@ export default function OtherUsers({user}){
                     userList.length ?
                         userList.map(item => <img src={item.photoURL} alt="avatar" key={item.uid} className={(item.uid !== user.uid ? 'img-list-users' : 'hide')} /> )
                     :
-                        <Spinner/>
+                    <Spinner/>
                 }
             </div>
         </section>
