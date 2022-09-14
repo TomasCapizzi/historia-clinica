@@ -1,9 +1,9 @@
-import React from "react";
-import AppInfo from "./AppInfo";
-import OtherUsers from "./OtherUsers";
-import PersonalInfo from "./Personal Information/PersonalInfo";
-import { Link } from "react-router-dom";
+import AppInfo from "../Components/AppInfo";
 import {FaPlus} from 'react-icons/fa';
+import { Link } from "react-router-dom";
+import OtherUsers from "../Components/OtherUsers";
+import PersonalInfo from "../Components/Personal Information/PersonalInfo";
+import React from "react";
 
 export default function Home({user}){
 

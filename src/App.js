@@ -1,17 +1,18 @@
-import React,{useState} from "react";
 import './Styles/main.scss'
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import Home from "./Components/Home";
-import Login from "./Components/Login";
-import Navbar from "./Components/Navbar";
-import Footer from "./Components/Footer";
-import {getAuth, onAuthStateChanged} from 'firebase/auth'
-import {app} from "./Firebase/firebase";
-import MedicalHistoryForm from "./Components/Medical History/MedicalHistoryForm";
-import RecordsList from "./Components/Medical History/RecordsList";
-import PatientDetail from "./Components/Medical History/PatientDetail";
-import UserContextProvider from "./Context/UserContext";
 
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import React,{useState} from "react";
+import {getAuth, onAuthStateChanged} from 'firebase/auth'
+
+import Footer from "./Components/Footer";
+import Home from "./Pages/Home";
+import Login from "./Pages/Login";
+import MedicalHistoryForm from "./Pages/MedicalHistoryForm";
+import Navbar from "./Components/Navbar";
+import PatientDetail from "./Pages/PatientDetail";
+import RecordsList from "./Pages/RecordsList";
+import UserContextProvider from "./Context/UserContext";
+import {app} from "./Firebase/firebase";
 
 function App() {
 
@@ -38,7 +39,6 @@ function App() {
             <Route path='/form' element={user ? <MedicalHistoryForm/> : <Login/>}/>
             <Route path='/records-list' element={user? <RecordsList/> : <Login/>} />
             <Route path='/patient/:id'  element={user? <PatientDetail/> : <Login/> } />
-
           </Routes>
           <Footer/>
         </div>

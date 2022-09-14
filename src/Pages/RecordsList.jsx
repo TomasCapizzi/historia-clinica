@@ -1,13 +1,13 @@
-import React,{useState, useEffect} from "react";
-import Spinner from "../Spinner";
-import { getAuth } from "@firebase/auth";
-import { app, db } from "../../Firebase/firebase";
-import Patient from "./Patient";
+import React,{useEffect, useState} from "react";
+import { app, db } from "../Firebase/firebase";
+
 import {BsSearch} from 'react-icons/bs';
-import PatientSearch from "./PatientSearch";
 import {IoChevronBackSharp} from 'react-icons/io5';
 import { Link } from "react-router-dom";
-
+import Patient from "../Components/Medical History/Patient";
+import PatientSearch from "../Components/Medical History/PatientSearch";
+import Spinner from "../Components/Spinner";
+import { getAuth } from "@firebase/auth";
 
 export default function RecordsList(){
 

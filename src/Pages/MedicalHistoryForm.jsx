@@ -1,11 +1,11 @@
-import React,{useState, useEffect} from "react";
-import { db,app } from "../../Firebase/firebase";
-import { getAuth } from "@firebase/auth";
-import { Link } from "react-router-dom";
+import {FiChevronsDown, FiChevronsUp} from 'react-icons/fi';
+import React,{useEffect, useState} from "react";
+import { app, db } from "../Firebase/firebase";
+
 import {IoArrowBack} from 'react-icons/io5';
 import {IoChevronBackSharp} from 'react-icons/io5';
-import {FiChevronsDown, FiChevronsUp} from 'react-icons/fi';
-
+import { Link } from "react-router-dom";
+import { getAuth } from "@firebase/auth";
 
 export default function MedicalHistoryForm(){   
 

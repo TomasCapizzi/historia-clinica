@@ -1,12 +1,13 @@
-import React,{useState, useEffect} from "react";
-import moment from "moment";
-import { useParams} from "react-router";
-import {db} from '../../Firebase/firebase'
-import Spinner from "../Spinner";
 import {FiChevronsDown, FiChevronsUp} from 'react-icons/fi';
-import {IoChevronBackSharp} from 'react-icons/io5';
+import React,{useEffect, useState} from "react";
+
 import {FaTrash} from 'react-icons/fa';
+import {IoChevronBackSharp} from 'react-icons/io5';
 import { Link } from "react-router-dom";
+import Spinner from "../Components/Spinner";
+import {db} from '../Firebase/firebase'
+import moment from "moment";
+import { useParams } from "react-router";
 
 export default function PatientDetail(){
 

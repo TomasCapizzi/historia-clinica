@@ -1,5 +1,6 @@
-import React,{useState,useEffect} from "react";
-import Spinner from "./Spinner";
+import React,{useEffect, useState} from "react";
+
+import Spinner from "../Components/Spinner";
 import useAuth from "../Hooks/useAuth";
 
 export default function Login(){
