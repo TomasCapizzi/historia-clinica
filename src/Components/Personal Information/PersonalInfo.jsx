@@ -1,7 +1,9 @@
-import React,{useState, useEffect} from "react";
-import {GrAddCircle} from 'react-icons/gr';
+import React,{useEffect, useState} from "react";
+
 import ExtraInfo from './ExtraInfo';
+import MissingInfo from "./MissingInfo";
 import Spinner from "../Spinner";
+import UserInfo from "./UserInfo";
 import useFirebaseUsersList from "../../Hooks/useFirebaseUsersList";
 import useLoad from "../../Hooks/useLoad";
 
@@ -33,37 +35,18 @@ export default function PersonalInfo({user}){
                 <h3>Your profile</h3>
                 <img src={user.photoURL} alt="avatar" />
             </div>
-
             {
                 !load ? <>
-                    { userData ? 
-                        <div className='user-data'>
-                            <div>
-                                <p>{userData.displayName}</p>
-                                <p>{userData.userBirth}</p>
-                            </div>
-                            <div>
-                                <p className='user-specialty'>{userData.specialty.toUpperCase()}</p>
-                                <p>{userData.userCollege}</p>
-                            </div>
-                        </div>
+                    { userData ? <UserInfo userData={userData} />
                         : <div className="missing-info">
                             {
                                 addInfo ? 
                                     <ExtraInfo  changeState={changeState}  user={user}/>
-                                :
-                                    <div className="complete-info">
-                                        <p>Your user is not complete</p>
-                                        <button onClick={changeState} className="btn1"><span>Finish user<GrAddCircle/></span></button>
-                                    </div>
-                        
+                                :   <MissingInfo changeState={changeState}  /> 
                             }
                         </div>
-
-                    } </>  :
-                        
-                    <Spinner />
-                    
+                    } 
+                </>  :  <Spinner />       
             }
         </section>
     )
