@@ -6,8 +6,6 @@ import PersonalInfo from "../Components/Personal Information/PersonalInfo";
 import React from "react";
 
 export default function Home({user}){
-
-
     return(
         <section className='home-container'>
             <PersonalInfo user={user}/>

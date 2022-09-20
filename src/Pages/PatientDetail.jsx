@@ -1,13 +1,15 @@
 import {FiChevronsDown, FiChevronsUp} from 'react-icons/fi';
-import React,{useEffect, useState} from "react";
+import React,{useEffect, useRef, useState} from "react";
 
 import {FaTrash} from 'react-icons/fa';
 import {IoChevronBackSharp} from 'react-icons/io5';
 import { Link } from "react-router-dom";
 import Spinner from "../Components/Spinner";
-import {db} from '../Firebase/firebase'
 import moment from "moment";
+import useDeleterecord from '../Hooks/useDeleterecord';
+import useGetRecord from '../Hooks/useGetRecord';
 import { useParams } from "react-router";
+import useToggleClass from '../Hooks/useToggleClass';
 
 export default function PatientDetail(){
 
@@ -20,42 +22,15 @@ export default function PatientDetail(){
     const [toggleHistoryView, setToggleHistoryView] = useState(false);
     const [toggleExamsView, setToggleExamsView] = useState(false);
 
-    const history = document.getElementById('history');
-    const exams = document.getElementById('exam');
+    const historyRef = useRef();
+    const examsRef = useRef();
 
+    const {getData} = useGetRecord({setPatient, setLoad});
+
+    const {toggleExamsClass, toggleHistoryClass} = useToggleClass({historyRef, setToggleHistoryView,toggleHistoryView, examsRef, setToggleExamsView,toggleExamsView});
+
+    const {deleteRecord} = useDeleterecord({patient, setHandleRecord})
  
-    function getData(){
-        const list = db.collection('records');
-        list.onSnapshot(
-            query => {
-                const data = query.docs.map(
-                    doc => ({
-                        ...doc.data(),
-                        id: doc.id
-                    }
-                    )
-                )
-                setPatient(data.filter(item => item.id === id))
-                setLoad(true);
-            }
-        )
-    }
-    function toggleHistoryClass(){
-        history.classList.toggle('on');
-        setToggleHistoryView(!toggleHistoryView);
-    }
-
-    function toggleExamsClass(){
-        exams.classList.toggle('on');
-        setToggleExamsView(!toggleExamsView);
-    }
-
-    // Delete Record
-    function deleteRecord(){
-        db.collection('records').doc(patient[0].id).delete();
-        setHandleRecord(false);
-    }
-
     //Update record
     /*
     function updateRecord(){
@@ -67,9 +42,8 @@ export default function PatientDetail(){
     }
     */
 
-
     useEffect(()=>{
-        getData();
+        getData(id);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[load])
 
@@ -97,7 +71,7 @@ export default function PatientDetail(){
                                     <h4>Personal History</h4>
                                     <span onClick={toggleHistoryClass}>{toggleHistoryView ? <FiChevronsUp/> : <FiChevronsDown/>}</span>
                                 </div>
-                                <ul id='history'>
+                                <ul ref={historyRef}>
                                     <li>{'Abortions: ' + patient[0].personalHistory.abortions}</li>
                                     <li>{'Gynecology: ' + patient[0].personalHistory.gynecology}</li>
                                     <li>{'Habits: ' + patient[0].personalHistory.habits}</li>
@@ -117,7 +91,7 @@ export default function PatientDetail(){
                                     <span onClick={toggleExamsClass}>{toggleExamsView ? <FiChevronsUp/> : <FiChevronsDown/>}</span>
                                 </div>              
                                 
-                                <ul className='options' id='exam'>
+                                <ul className='options' ref={examsRef} >
                                     <li>{'Abdomen: ' + patient[0].physicalExam.abdomen}</li>
                                     <li>{'Cardiovascular System: ' + patient[0].physicalExam.cardiovascularSystem}</li>
                                     <li>{'Genitals: ' + patient[0].physicalExam.genitals}</li>

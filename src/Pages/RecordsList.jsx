@@ -1,5 +1,4 @@
-import React,{useEffect, useState} from "react";
-import { app, db } from "../Firebase/firebase";
+import React,{useEffect, useRef, useState} from "react";
 
 import {BsSearch} from 'react-icons/bs';
 import {IoChevronBackSharp} from 'react-icons/io5';
@@ -7,42 +6,21 @@ import { Link } from "react-router-dom";
 import Patient from "../Components/Medical History/Patient";
 import PatientSearch from "../Components/Medical History/PatientSearch";
 import Spinner from "../Components/Spinner";
+import { app } from "../Firebase/firebase";
 import { getAuth } from "@firebase/auth";
+import useFilterRecords from "../Hooks/useFilterRecords";
+import useGetRecordList from "../Hooks/useGetRecordList";
 
 export default function RecordsList(){
 
     const [load, setLoad] = useState(false);
     const [patients, setPatients] = useState([]);
-    const [patientsFilter, setPatientsFilter] = useState([])
-    const auth = getAuth(app)
-
-    function getList(user){
-        const list = db.collection('records');
-        list.onSnapshot(
-            query => {
-                const data = query.docs.map(
-                    doc => ({
-                        ...doc.data(),
-                        id: doc.id
-                    })
-                )
-                setPatients(data.filter(item => item.uid === user.currentUser.uid))
-                setLoad(true)
-            }
-        )
-    }
-
-    function filterPatients(){
-        const filter = document.getElementById('filter').value;
-        if(filter.length >0){
-            setPatientsFilter(patients.filter(item => item.interrogatory.name.toLowerCase().includes(filter)))
-        } else{
-            setPatientsFilter([])
-        }
-        
-    }
-
-
+    const [patientsFilter, setPatientsFilter] = useState([]);
+    const auth = getAuth(app);
+    const {getList} = useGetRecordList({setPatients, setLoad});
+    const filterRef = useRef();
+    const {filterPatients} = useFilterRecords({filterRef, patients, setPatientsFilter});
+    
     useEffect(()=>{
         getList(auth);
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,7 +30,7 @@ export default function RecordsList(){
         <section className='records-list'>
             <Link to='/'><IoChevronBackSharp className='back-page'/></Link>
             <div className='search-container'>
-                <input type="text" id='filter' onChange={filterPatients}/>
+                <input type="text" ref={filterRef} onChange={filterPatients}/>
                 <BsSearch/>
             </div>
             {
