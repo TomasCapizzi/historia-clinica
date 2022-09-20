@@ -1,12 +1,12 @@
 @import './data';
 
 .about-app{
-    display: none;
-    width: 100%;
+    display: flex;
+    width: 1080px;
     flex-wrap: wrap;
     justify-content: center;
     text-align: center;
-
+    margin-bottom: 50px;
     h3{
         width: 100%;
         color: $c7;
@@ -19,18 +19,7 @@
     }
 
 
-    @media only screen and(min-width: 1024px) {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 45%;
-        text-align: center;
-        h3{
-            font-size: 1.7rem;
-        }
-        p{
-            width: 80%;
-            font-size: 1.3rem;
-        }
+    @media only screen and(max-width: 1200px) {
+        width: 90%;
     }
 }
