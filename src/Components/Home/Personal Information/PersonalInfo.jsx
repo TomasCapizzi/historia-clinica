@@ -2,10 +2,10 @@ import React,{useEffect, useState} from "react";
 
 import ExtraInfo from './ExtraInfo';
 import MissingInfo from "./MissingInfo";
-import Spinner from "../Spinner";
+import Spinner from "../../Spinner";
 import UserInfo from "./UserInfo";
-import useFirebaseUsersList from "../../Hooks/useFirebaseUsersList";
-import useLoad from "../../Hooks/useLoad";
+import useFirebaseUsersList from "../../../Hooks/useFirebaseUsersList";
+import useLoad from "../../../Hooks/useLoad";
 
 export default function PersonalInfo({user}){
 
@@ -30,21 +30,21 @@ export default function PersonalInfo({user}){
     },[])
 
     return(
-        <section className='personal-info'>
-            <div className='info-header'>
-                <h3>Your profile</h3>
-                <img src={user.photoURL} alt="avatar" />
+        <section className='flex w-full lg:w-1024 flex-wrap justify-center'>
+            <div className='flex w-full flex-col items-center'>
+                <h3 className="text-center font-semibold text-cyan-500 text-xl lg:text-2xl mb-2 lg:mb-4">Your profile</h3>
+                <img src={user.photoURL} alt="avatar" className="rounded-full mb-3 w-24 lg:w-36 h-24 lg:h-36 shadow-md" />
             </div>
             {
                 !load ? <>
                     { userData ? <UserInfo userData={userData} />
-                        : <div className="missing-info">
+                        : <>
                             {
                                 addInfo ? 
                                     <ExtraInfo  changeState={changeState}  user={user}/>
-                                :   <MissingInfo changeState={changeState}  /> 
+                                :   <MissingInfo changeState={changeState}/> 
                             }
-                        </div>
+                        </>
                     } 
                 </>  :  <Spinner />       
             }
