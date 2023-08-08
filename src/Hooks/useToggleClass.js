@@ -1,11 +1,11 @@
 const useToggleClass = ({historyRef, setToggleHistoryView,toggleHistoryView, examsRef, setToggleExamsView,toggleExamsView}) => {
     function toggleHistoryClass(){
-        historyRef.current.classList.toggle('on');
+        historyRef.current.classList.toggle('hidden');
         setToggleHistoryView(!toggleHistoryView);
     }
 
     function toggleExamsClass(){
-        examsRef.current.classList.toggle('on');
+        examsRef.current.classList.toggle('hidden');
         setToggleExamsView(!toggleExamsView);
     }
   return {
