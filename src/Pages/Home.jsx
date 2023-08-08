@@ -1,18 +1,14 @@
-import AppInfo from "../Components/AppInfo";
-import {FaPlus} from 'react-icons/fa';
-import { Link } from "react-router-dom";
-import OtherUsers from "../Components/OtherUsers";
-import PersonalInfo from "../Components/Personal Information/PersonalInfo";
+import AppInfo from "../Components/Home/AppInfo";
+import HomeButtons from "../Components/Home/HomeButtons";
+import OtherUsers from "../Components/Home/OtherUsers";
+import PersonalInfo from "../Components/Home/Personal Information/PersonalInfo";
 import React from "react";
 
 export default function Home({user}){
     return(
-        <section className='home-container'>
+        <section className='flex flex-col items-center justify-center w-full'>
             <PersonalInfo user={user}/>
-            <div className='btn-container'>
-                <Link to='/records-list'><button className='btn1'><span>List of Patients</span></button></Link>
-                <Link to='/form'><button className='btn2'><span>Create New Medical Record <FaPlus/></span></button></Link>
-            </div>
+            <HomeButtons/>
             <AppInfo/>
             <OtherUsers user={user}/>
         </section>
