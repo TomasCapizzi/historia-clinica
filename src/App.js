@@ -1,5 +1,3 @@
-import './Styles/main.scss'
-
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import React,{useState} from "react";
 import {getAuth, onAuthStateChanged} from 'firebase/auth'
@@ -29,11 +27,11 @@ function App() {
   return (
     <UserContextProvider>
       <BrowserRouter>
-        <div className="App">
+        <div className="m-0 p-0 flex items-center flex-col relative max-w-full">
           <Navbar/>
           <Routes>
             {
-              user ? <Route path='/' element={ <Home  user={user} setUser={setUser} />}/> 
+              user ? <Route path='/' element={<Home user={user} setUser={setUser}/>}/> 
               :  <Route path='/'element={<Login/> } />
             }         
             <Route path='/form' element={user ? <MedicalHistoryForm/> : <Login/>}/>
