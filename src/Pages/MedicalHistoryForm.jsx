@@ -1,13 +1,10 @@
 import React,{useEffect, useRef, useState} from "react";
 import { app, db } from "../Firebase/firebase";
 
+import BackPage from "../Components/BackPage";
 import Diagnosis from '../Components/Medical History/Form/Diagnosis';
+import FormContainer from "../Components/Medical History/Form/FormContainer";
 import FormSuccess from '../Components/Medical History/Form/FormSuccess';
-import History from '../Components/Medical History/Form/History';
-import Interrogatory from '../Components/Medical History/Form/Interrogatory';
-import {IoChevronBackSharp} from 'react-icons/io5';
-import { Link } from "react-router-dom";
-import Results from '../Components/Medical History/Form/Results';
 import { getAuth } from "@firebase/auth";
 import useExamsForm from "../Hooks/RecordForm/useExamsForm";
 import useHistoryForm from "../Hooks/RecordForm/useHistoryForm";
@@ -108,12 +105,10 @@ export default function MedicalHistoryForm(){
         <>
         {
             recordHandler ? 
-                <form action="" className='record-form'>
-                    <Link to='/'><IoChevronBackSharp className='back-page'/></Link>
-                    <h1>Create new record</h1>
-                    <Interrogatory interrogatoryRefs={interrogatoryRefs} />
-                    <History historyRefs={historyRefs} />
-                    <Results examRefs={examRefs} />
+                <form action="" className='flex flex-col flex-wrap w-full items-center min-h-screen relative'>
+                    <BackPage url='/'/>
+                    <h1 className="text-sky-700 text-xl sm:text-2xl font-bold mb-11">Create new record</h1>
+                    <FormContainer interrogatoryRefs={interrogatoryRefs} historyRefs={historyRefs} examRefs={examRefs} />
                     <Diagnosis createRecord={createRecord} diagnosisRef={diagnosisRef} />
                 </form>
             :   <FormSuccess/>
