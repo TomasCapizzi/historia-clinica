@@ -9,16 +9,16 @@ function Interrogatory({interrogatoryRefs}) {
   const interrogaroyRef = useRef();
 
   function toggleInterrogatoryClass(e){
-    interrogaroyRef.current.classList.toggle('on');
+    interrogaroyRef.current.classList.toggle('hidden');
     setToggleInterrogaroyView(!toggleInterrogatoryView);
   }
 
 
   return (
-    <article className='form-interrogatory'>
-        <div className='header'>
-            <h5>Interrogatory</h5>
-            <span onClick={toggleInterrogatoryClass}>{toggleInterrogatoryView ? <FiChevronsUp/> : <FiChevronsDown/>}</span>
+    <article className='flex flex-wrap w-full justify-center bg-white'>
+        <div className='flex w-full justify-around items-center flex-row p-4'>
+            <h5 className='w-2/4 text-start text-sky-700 text-base sm:text-xl font-bold'>Interrogatory</h5>
+            <span className='bg-transparent border-none text-2xl font-bold text-sky-700' onClick={toggleInterrogatoryClass}>{toggleInterrogatoryView ? <FiChevronsUp/> : <FiChevronsDown/>}</span>
         </div>
         <InterrogatoryOptions interrogaroyRef={interrogaroyRef}  interrogatoryRefs={interrogatoryRefs} />
     </article>

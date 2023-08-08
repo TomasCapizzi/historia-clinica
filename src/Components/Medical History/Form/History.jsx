@@ -9,15 +9,15 @@ function History({historyRefs}) {
   const historyRef = useRef()
 
   function toggleHistoryClass(){
-    historyRef.current.classList.toggle('on');
+    historyRef.current.classList.toggle('hidden');
     setToggleHistoryView(!toggleHistoryView)
 }
 
   return (
-    <article className='form-history'>
-      <div  className='header'>
-          <h5>Personal History</h5>
-          <span onClick={toggleHistoryClass}>{toggleHistoryView ? <FiChevronsUp/> : <FiChevronsDown/>}</span>
+    <article className='flex flex-wrap w-full flex-col p-4 bg-cyan-500 justify-center items-center'>
+      <div  className='flex justify-around w-full items-center flex-row'>
+          <h5 className='w-2/4 text-start font-bold text-base sm:text-xl text-white'>Personal History</h5>
+          <span className='bg-transparent border-none text-2xl font-bold text-white' onClick={toggleHistoryClass}>{toggleHistoryView ? <FiChevronsUp/> : <FiChevronsDown/>}</span>
       </div>
       <HistoryOptions historyRef={historyRef} historyRefs={historyRefs} />
   </article>
